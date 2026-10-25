@@ -33,7 +33,7 @@ To install it:
 ## Creating a new workspace
 
 ```bash
-pixi exec copier copy gh:rivques/comprobo_ros_pixi_template <your_workspace_name>
+pixi exec copier copy --trust gh:rivques/comprobo_ros_pixi_template <your_workspace_name>
 ```
 
 Copier will ask for your package name, initial node name, description, author, and license. It then:
@@ -54,7 +54,7 @@ pixi run <your_package_name>
 
 ## Benefits and drawbacks of this approach
 ### Benefits
-- **Support for any Linux version**: No longer is Ubuntu 24.04 specifically required. This should work on any Linux version that supports Pixi. Also, updating to newer ROS versions should be more painless now.
+- **Support for any Linux version**: Ubuntu 24.04 isn't specifically required anymore. This should work on any Linux version that supports Pixi. Also, updating to newer ROS versions should be more painless now.
 - **Improved dependency management**: Because each workspace is entirely self-contained, different projects can use different versions of packages without conflict. This should mean no more Numpy 1.x errors, no more `--break-system-packages`, and no more sacrificing the global Python install to ROS. This benefit should become greater later into the year as projects use increasingly diverse dependencies.
 - **Easier setup**: The installation process should be much simpler than the existing process. Steps 3-4 of the computational setup should become ~5 lines of code total (though this needs testing, especially to make sure that ROS_DOMAIN_ID and hping3 are set up correctly).
 - **You can run a build from anywhere**: ok this is a small one but running `colcon build` from `src` instead of `ros2_ws` has bit me enough times that i'm calling it out

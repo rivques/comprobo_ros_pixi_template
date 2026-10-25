@@ -2,36 +2,35 @@
 # Run with: pixi exec copier copy gh:rivques/comprobo_ros_pixi_template <your_workspace_name>
 _subdirectory: template
 
-questions:
-  package_name:
-    type: str
-    help: "Name of your ROS2 package (snake_case, e.g. my_package)"
+package_name:
+  type: str
+  help: "Name of your ROS2 package (snake_case, e.g. my_package)"
 
-  node_name:
-    type: str
-    help: "Name of your initial ROS2 node (snake_case, e.g. my_node)"
+node_name:
+  type: str
+  help: "Name of your initial ROS2 node (snake_case, e.g. my_node)"
 
-  description:
-    type: str
-    help: "Short description of this package"
-    default: "A ROS2 package for CompRobo"
+description:
+  type: str
+  help: "Short description of this package"
+  default: "A ROS2 package for CompRobo"
 
-  author_name:
-    type: str
-    help: "Your name (primary maintainer)"
+author_name:
+  type: str
+  help: "Your name (primary maintainer)"
 
-  author_email:
-    type: str
-    help: "Your email address (primary maintainer)"
+author_email:
+  type: str
+  help: "Your email address (primary maintainer)"
 
-  license:
-    type: str
-    help: "License for your package"
-    default: MIT
-    choices:
-      - MIT
-      - Apache-2.0
-      - GPL-3.0
+license:
+  type: str
+  help: "License for your package"
+  default: MIT
+  choices:
+    - MIT
+    - Apache-2.0
+    - GPL-3.0
 
 _tasks:
   # 1. Initialize a git repo in the new workspace
