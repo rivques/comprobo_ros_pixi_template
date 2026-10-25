@@ -1,0 +1,60 @@
+# Copier template for a CompRobo ROS2 Jazzy + Pixi workspace
+# Run with: pixi exec copier copy gh:rivques/comprobo_ros_pixi_template <your_workspace_name>
+_subdirectory: template
+
+questions:
+  package_name:
+    type: str
+    help: "Name of your ROS2 package (snake_case, e.g. my_package)"
+
+  node_name:
+    type: str
+    help: "Name of your initial ROS2 node (snake_case, e.g. my_node)"
+
+  description:
+    type: str
+    help: "Short description of this package"
+    default: "A ROS2 package for CompRobo"
+
+  author_name:
+    type: str
+    help: "Your name (primary maintainer)"
+
+  author_email:
+    type: str
+    help: "Your email address (primary maintainer)"
+
+  license:
+    type: str
+    help: "License for your package"
+    default: MIT
+    choices:
+      - MIT
+      - Apache-2.0
+      - GPL-3.0
+
+_tasks:
+  # 1. Initialize a git repo in the new workspace
+  - "git init ."
+
+  # 2. Create src/ and scaffold the ROS2 package using the pixi-managed ros2 CLI.
+  #    The activation script (install/setup.sh) is already in pixi.toml; the
+  #    placeholder copied by Copier prevents any 'file not found' warning.
+  - "mkdir -p src"
+  - >-
+    (cd src && pixi run ros2 pkg create
+    --build-type ament_python
+    --license {{ license }}
+    --description "{{ description }}"
+    --maintainer-name "{{ author_name }}"
+    --maintainer-email "{{ author_email }}"
+    --node-name {{ node_name }}
+    {{ package_name }})
+
+  # 3. Add the neato_packages submodule (needed for Gazebo simulation tasks).
+  - "git submodule add https://github.com/comprobo26/neato_packages.git src/neato_packages"
+  - "git submodule update --init"
+
+  # 4. Done!
+  - >-
+    echo "Workspace ready! Now: cd {{ _copier_conf.dst_path.name }} && pixi run build && pixi run {{ package_name }}"
