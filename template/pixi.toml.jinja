@@ -13,7 +13,7 @@ ros-clean = "rm -r build install log"
 # Run a node from {{ package_name }}. Defaults to {{ node_name }}, or pass a different node name as an argument.
 # e.g.: pixi run {{ package_name }}          (runs {{ node_name }})
 #        pixi run {{ package_name }} other_node
-{{ package_name }} = { cmd = "ros2 run {{ package_name }} {args:{{ node_name }}}" }
+{{ package_name }} = { cmd = "ros2 run {{ package_name }} {{ '{{node}}' }}", "args" = [{"arg"= "node", "default"= "{{ node_name }}"}] }
 test = "colcon test --packages-select {{ package_name }} && colcon test-result --verbose"
 gazebo-empty = "ros2 launch neato2_gazebo empty_world.py"
 gazebo-gauntlet = "ros2 launch neato2_gazebo neato_gauntlet_world.py"
