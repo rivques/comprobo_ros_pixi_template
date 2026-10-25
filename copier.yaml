@@ -54,6 +54,10 @@ _tasks:
   - "git submodule add https://github.com/comprobo26/neato_packages.git src/neato_packages"
   - "git submodule update --init"
 
-  # 4. Done!
+  # 4. Commit the initial workspace state to git.
+  - "git add ."
+  - "git commit -m 'Initial commit'"
+
+  # 5. Done!
   - >-
     echo "Workspace ready! Now: cd {{ _copier_conf.dst_path.name }} && pixi run build && pixi run {{ package_name }}"
